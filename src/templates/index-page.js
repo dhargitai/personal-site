@@ -1,55 +1,66 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
-
+import Img from 'gatsby-image'
 import Layout from '../components/Layout'
-import Features from '../components/Features'
-import BlogRoll from '../components/BlogRoll'
+import github from '../img/social/github.svg'
+import linkedin from "../img/social/linkedin.svg";
+// import Features from '../components/Features'
+// import BlogRoll from '../components/BlogRoll'
 
 import { rhythm } from '../utils/typography'
-import SimpleSocialNetwork from '@bit/devrchancay.esco.organisms.simple-social-network';
 
 export const IndexPageTemplate = ({
-  image,
-  title,
-  heading,
-  subheading,
-  mainpitch,
-  description,
-  intro,
-}) => (
-  <div>
-    <div
-        style={{
-          margin: `${rhythm(3)} auto`,
-          maxWidth: '700px'
-        }}>
-        <SimpleSocialNetwork
+         image,
+         title,
+         heading,
+         headshot,
+         subheading,
+         mainpitch,
+         description,
+         intro
+       }) => (
+         <div>
+           <section
+             className="section has-text-centered"
+             style={{
+               backgroundColor: "rgb(232, 237, 240)",
+               margin: `${rhythm(3)} auto`,
+               maxWidth: "700px"
+             }}
+           >
+             <Img className="headshot" fixed={headshot} alt="" />
+             <h1>David Hargitai</h1>
+             <h2>Front-End Engineer</h2>
 
-          title="David Hargitai"
-          subTitle="front-end engineer"
-          socialNetworks={[
-            {
-              icon: { name: 'facebook', label: 'Facebook' },
-              link: { url: 'https://www.facebook.com/hargitai.david', label: 'Facebook' },
-            },
-            /* {
-              icon: { name: 'twitter', label: 'Twitter' },
-              link: { url: 'https://twitter.com/hargitaidavid', label: 'Twitter' },
-            }, */
-            {
-              icon: { name: 'linkedin', label: 'Linkedin' },
-              link: { url: 'https://www.linkedin.com/in/hargitai', label: 'Linkedin' },
-            },
-            {
-              icon: { name: 'github', label: 'Github' },
-              link: { url: 'https://github.com/dhargitai', label: 'Github' },
-            },
-          ]}
-        />
-    </div>
-      
-    {/* <div
+             <a
+               title="GitHub"
+               href="https://github.com/dhargitai"
+             >
+               <img
+                 src={github}
+                 alt="GitHub"
+                 style={{
+                   width: rhythm(2),
+                   height: rhythm(2),
+                   margin: `${rhythm(1 / 2)} ${rhythm(1 / 4)}`
+                 }}
+               />
+             </a>
+             <a title="LinkedIn" href="https://www.linkedin.com/in/hargitai">
+               <img
+                 src={linkedin}
+                 alt="LinkedIn"
+                 style={{
+                   width: rhythm(2),
+                   height: rhythm(2),
+                   margin: `${rhythm(1 / 2)} ${rhythm(1 / 4)}`
+                 }}
+               />
+             </a>
+           </section>
+
+           {/* <div
       className="full-width-image margin-top-0"
       style={{
         backgroundImage: `url(${
@@ -144,8 +155,8 @@ export const IndexPageTemplate = ({
         </div>
       </div>
     </section> */}
-  </div>
-)
+         </div>
+       );
 
 IndexPageTemplate.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -166,6 +177,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <IndexPageTemplate
         image={frontmatter.image}
+        headshot={data.file.childImageSharp.fixed}
         title={frontmatter.title}
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
@@ -188,39 +200,46 @@ IndexPage.propTypes = {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query IndexPageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
-      frontmatter {
-        title
-        image {
-          childImageSharp {
-            fluid(maxWidth: 2048, quality: 100) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        heading
-        subheading
-        mainpitch {
-          title
-          description
-        }
-        description
-        intro {
-          blurbs {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 240, quality: 64) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            text
-          }
-          heading
-          description
-        }
-      }
-    }
-  }
-`
+         query IndexPageTemplate {
+           markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+             frontmatter {
+               title
+               image {
+                 childImageSharp {
+                   fluid(maxWidth: 2048, quality: 100) {
+                     ...GatsbyImageSharpFluid
+                   }
+                 }
+               }
+               heading
+               subheading
+               mainpitch {
+                 title
+                 description
+               }
+               description
+               intro {
+                 blurbs {
+                   image {
+                     childImageSharp {
+                       fluid(maxWidth: 240, quality: 64) {
+                         ...GatsbyImageSharpFluid
+                       }
+                     }
+                   }
+                   text
+                 }
+                 heading
+                 description
+               }
+             }
+           }
+           file(relativePath: { eq: "david-hargitai-front-end-engineer.png" }) {
+             childImageSharp {
+               fixed(width: 200, height: 200) {
+                 ...GatsbyImageSharpFixed
+               }
+             }
+           }
+         }
+       `;
