@@ -6,6 +6,9 @@ import Layout from '../components/Layout'
 import Features from '../components/Features'
 import BlogRoll from '../components/BlogRoll'
 
+import { rhythm } from '../utils/typography'
+import SimpleSocialNetwork from '@bit/devrchancay.esco.organisms.simple-social-network';
+
 export const IndexPageTemplate = ({
   image,
   title,
@@ -17,6 +20,36 @@ export const IndexPageTemplate = ({
 }) => (
   <div>
     <div
+        style={{
+          margin: `${rhythm(3)} auto`,
+          maxWidth: '700px'
+        }}>
+        <SimpleSocialNetwork
+
+          title="David Hargitai"
+          subTitle="front-end engineer"
+          socialNetworks={[
+            {
+              icon: { name: 'facebook', label: 'Facebook' },
+              link: { url: 'https://www.facebook.com/hargitai.david', label: 'Facebook' },
+            },
+            /* {
+              icon: { name: 'twitter', label: 'Twitter' },
+              link: { url: 'https://twitter.com/hargitaidavid', label: 'Twitter' },
+            }, */
+            {
+              icon: { name: 'linkedin', label: 'Linkedin' },
+              link: { url: 'https://www.linkedin.com/in/hargitai', label: 'Linkedin' },
+            },
+            {
+              icon: { name: 'github', label: 'Github' },
+              link: { url: 'https://github.com/dhargitai', label: 'Github' },
+            },
+          ]}
+        />
+    </div>
+      
+    {/* <div
       className="full-width-image margin-top-0"
       style={{
         backgroundImage: `url(${
@@ -110,7 +143,7 @@ export const IndexPageTemplate = ({
           </div>
         </div>
       </div>
-    </section>
+    </section> */}
   </div>
 )
 

@@ -1,8 +1,27 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
-    description:
-      'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
+    title: "David's nest",
+    author: "David Hargitai",
+    description: "The site of David Hargitai front-end engineer",
+    siteUrl: "https://davidhargitai.com/",
+    social: [
+      {
+        name: "twitter",
+        url: "https://twitter.com/hargitaidavid",
+      },
+      {
+        name: "github",
+        url: "https://github.com/dhargitai",
+      },
+      {
+        name: "linkedin",
+        url: "https://www.linkedin.com/in/hargitai",
+      },
+      {
+        name: "facebook",
+        url: "https://www.facebook.com/hargitai.david",
+      },
+    ],
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -73,5 +92,11 @@ module.exports = {
       },
     }, // must be after other CSS plugins
     'gatsby-plugin-netlify', // make sure to keep it last in the array
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/utils/typography'
+      }
+    },
   ],
 }
